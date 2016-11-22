@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html ng-app>
 <head>
@@ -78,6 +79,7 @@
 	  <ul class="nav nav-tabs" role="tablist">
 	    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Registro</a></li>
 	    <li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab">Datos</a></li>
+	    <li role="presentation"><a href="#chat" aria-controls="chat" role="tab" data-toggle="tab">Chat</a></li>
 	  </ul>
 
 	  <!-- Tab panes -->
@@ -87,21 +89,23 @@
 				<h1>Registro</h1>
 				<form onsubmit="validar(email)">
 					<div class="col-md-offset-3 col-md-6 col-md-offset-3">
+						<label>Nick:</label>
+						<input type="text" class="form-control" id="nick" ng-model="nick" required>
 						<label>Nombre:</label>
 						<input type="text" class="form-control" id="name" ng-model="name" required>
 						<label>Apellidos</label>
 						<input type="text" class="form-control" id="apellidos" ng-model="apellidos" required>
 						<label>Email:</label>
-						<input type="text" class="form-control" id="email" value="Email" ng-model="email" required>
+						<input type="text" class="form-control" id="email" ng-model="email" required>
 					
 						<div class="radio" id="edad">
 							<label>Edad:</label>
-							<label><input type="radio" name="menor">menor de  18</label>
+							<label><input type="radio" name="menor" required>menor de  18</label>
 							<label><input type="radio" name="joven">entre 18 y 30</label>
 							<label><input type="radio" name="adulto">entre 31 y 60</label>
 							<label><input type="radio" name="mayor">mayor de 60</label>
 						</div>
-						<div class="radio" id="intereses">
+						<div class="radio" id="genero">
 							<label>Género:</label>
 							<label><input type="radio" name="masculino">Masculino</label>
 							<label><input type="radio" name="femenino">Femenino</label>
@@ -137,28 +141,38 @@
 							<label>Comentario acerca de la web:</label>
 							<textarea class="form-control" rows="5" id="comentario" ng-model="comentario"></textarea>
 						</div> 
-						<input type="submit" value="Enviar"> 
+						<input type="submit" value="Enviar" onclick="baseDatos()"> 
 					</div>
 				</form>
 			</div>
 	    </div>
 	    <div role="tabpanel" class="tab-pane" id="datos">
 	    		<div id="registro">
-		<h2>Nombre: {{name}} </h2>
-		<h2>Apellidos: {{apellidos}}</h2>
-		<h2>Email: {{email}}</h2>
-		<h2>Comentario: {{comentario}}</h2>
-	</div>
-	    </div>
+	    			<h2>Nick: {{nick}}</h2>
+					<h2>Nombre: {{name}} </h2>
+					<h2>Apellidos: {{apellidos}}</h2>
+					<h2>Email: {{email}}</h2>
+					<h2>Comentario: {{comentario}}</h2>
+				</div>
+		</div>
 
-	  </div>
+		<div role="tabpanel" class="tab-pane" id="chat">
+			<div id="messagesDiv" class="text-center">
+			<h1>Chat</h1> </div>
+			<div id="textos-chat" class="text-center">
+				<input type="text" id="nameInput" placeholder="Name">
+			    <input type="text" id="messageInput" placeholder="Message" onkeypress="enviar(event)">
+			</div>
+		</div>
+
+	  	</div>
 
 	</div>
 
 	<footer>
 	<div class="row text-center" id="footer">
 		<div class="col-md-6">
-			<a href="https://github.com/alu0100767803/Practica2-AngularJS-Bootstrap.git" target="_blank"><img src="images/github-logo.png"></img></a>
+			<a href="https://github.com/alu0100767803/Practica3-NodeJs-Firebase.git" target="_blank"><img src="images/github-logo.png"></img></a>
 		</div>
 		<div class="col-md-6">
 			Imagenes obtenidas de:
@@ -175,12 +189,26 @@
 
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 	<script type="text/javascript" src="javascripts/comprobacion.js"></script>
+
+	<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyCwx7YZOMDyU8ZWwb8kUXhNcf_gx1bSgak",
+	    authDomain: "landing-page-12dd7.firebaseapp.com",
+	    databaseURL: "https://landing-page-12dd7.firebaseio.com",
+	    storageBucket: "landing-page-12dd7.appspot.com",
+	    messagingSenderId: "112909300625"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+
+	<script type="text/javascript" src="javascripts/base_datos.js"></script>
+	<script type="text/javascript" src="javascripts/chat.js"></script>
 
 </body>
 </html>
